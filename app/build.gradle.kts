@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("org.jetbrains.kotlin.kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -58,7 +59,18 @@ dependencies {
         kapt(libs.glideCompiler)
 
         // QR Code Scanner (ZXing Android)
-        implementation(libs.zxing)
+        //implementation(libs.zxing)
+
+        // Moshi
+        implementation("com.squareup.retrofit2:converter-moshi:2.8.1")
+
+        // ViewModel
+        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+        implementation("androidx.recyclerview:recyclerview:1.3.2")
+        implementation("androidx.cardview:cardview:1.0.0")
+        implementation("com.github.bumptech.glide:glide:4.12.0")
+        kapt("com.github.bumptech.glide:compiler:4.12.0")
+
     }
 
 }
