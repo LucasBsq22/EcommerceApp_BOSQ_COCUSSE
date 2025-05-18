@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/footer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="?attr/colorSurface"
+    android:elevation="4dp">
+
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:queryHint="Rechercher un article"
+        android:iconifiedByDefault="false" />
+
+
+    <ImageButton
+        android:id="@+id/btnFooterCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_shopping_cart"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/cart"
+        android:layout_marginStart="12dp"
+        app:tint="?attr/colorOnSurface" />
+</LinearLayout>
