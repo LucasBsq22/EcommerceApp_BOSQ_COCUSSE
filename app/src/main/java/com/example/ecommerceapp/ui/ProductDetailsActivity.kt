@@ -22,6 +22,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         product?.let {
             binding.tvProductTitle.text = it.title
             binding.tvProductPrice.text = "${it.price} €"
+            binding.tvProductRating.text = "Note : ${it.rating.rate} (${it.rating.count} avis)"
             binding.tvProductDescription.text = it.description
 
             Glide.with(this)
