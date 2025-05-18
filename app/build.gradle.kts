@@ -59,7 +59,10 @@ dependencies {
         kapt(libs.glideCompiler)
 
         // QR Code Scanner (ZXing Android)
+        implementation(libs.zxing.android.embedded)
+        implementation(libs.core)
         //implementation(libs.zxing)
+        //implementation("me.dm7.barcodescanner:zxing:1.9.13")
 
         // Moshi
         implementation("com.squareup.retrofit2:converter-moshi:2.8.1")

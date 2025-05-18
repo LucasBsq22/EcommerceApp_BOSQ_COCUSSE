@@ -41,5 +41,10 @@ class ProductDetailsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val productId = intent.getIntExtra("product_id", -1)
+        if (productId != -1) {
+            // Appelle l'API pour récupérer le produit par ID
+        }
+
     }
 }

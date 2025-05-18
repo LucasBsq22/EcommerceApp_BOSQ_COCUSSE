@@ -81,7 +81,17 @@ class ListProductsActivity : AppCompatActivity() {
 
                 productAdapter.submitList(filteredList)
             }
+
+
+
         })
+        val btnQR: ImageButton = footer.findViewById(R.id.btnFooterQR)
+
+        btnQR.setOnClickListener {
+            val intent = Intent(this, QRScanActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
     }
