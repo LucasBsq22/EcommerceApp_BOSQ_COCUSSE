@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
-import com.example.ecommerceapp.ui.ProductDetailsActivity
 
 class QRScanActivity : AppCompatActivity() {
 
