@@ -14,6 +14,8 @@ import com.example.ecommerceapp.R
 import com.example.ecommerceapp.databinding.ActivityListProductsBinding
 import com.example.ecommerceapp.viewmodel.ProductViewModel
 import com.example.ecommerceapp.ui.adapter.ProductAdapter
+import androidx.recyclerview.widget.GridLayoutManager
+
 
 class ListProductsActivity : AppCompatActivity() {
 
@@ -32,10 +34,15 @@ class ListProductsActivity : AppCompatActivity() {
 
         productAdapter = ProductAdapter()
 
+//        binding.recyclerViewProducts.apply {
+//            layoutManager = LinearLayoutManager(this@ListProductsActivity)
+//            adapter = productAdapter
+//        }
         binding.recyclerViewProducts.apply {
-            layoutManager = LinearLayoutManager(this@ListProductsActivity)
+            layoutManager = GridLayoutManager(this@ListProductsActivity, 2)
             adapter = productAdapter
         }
+
 
         viewModel.fetchAllProducts()
 
