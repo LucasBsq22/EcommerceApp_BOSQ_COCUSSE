@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <include layout="@layout/header"/>
+
         <ImageView
             android:id="@+id/ivProductImage"
             android:layout_width="match_parent"
@@ -56,13 +58,5 @@
             android:layout_height="wrap_content"
             android:text="Ajouter au panier"
             android:layout_marginTop="20dp" />
-
-        <Button
-            android:id="@+id/btnViewCart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Voir le panier"
-            android:layout_marginTop="12dp" />
-
     </LinearLayout>
 </ScrollView>

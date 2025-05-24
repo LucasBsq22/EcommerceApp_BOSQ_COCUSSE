@@ -27,14 +27,4 @@
         android:layout_marginStart="12dp"
         app:tint="?attr/colorOnSurface" />
 
-
-    <ImageButton
-        android:id="@+id/btnFooterCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_shopping_cart"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/cart"
-        android:layout_marginStart="12dp"
-        app:tint="?attr/colorOnSurface" />
 </LinearLayout>

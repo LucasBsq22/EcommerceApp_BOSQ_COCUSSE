@@ -14,7 +14,12 @@ object CartManager {
     }
 
     fun getTotalPrice(): Double {
-        return cartItems.sumOf { it.price }
+        return String.format("%.2f", cartItems.sumOf { it.price }).toDouble()
+    }
+
+
+    fun getCartSize(): Int {
+        return cartItems.size
     }
 
     fun clearCart() {

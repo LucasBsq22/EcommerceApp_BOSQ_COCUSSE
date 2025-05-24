@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,9 @@ import com.example.ecommerceapp.R
 import com.example.ecommerceapp.databinding.ActivityListProductsBinding
 import com.example.ecommerceapp.viewmodel.ProductViewModel
 import com.example.ecommerceapp.ui.adapter.ProductAdapter
+import com.example.ecommerceapp.ui.CartActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.ecommerceapp.cart.CartManager
 
 
 class ListProductsActivity : AppCompatActivity() {
@@ -57,10 +60,11 @@ class ListProductsActivity : AppCompatActivity() {
         }
 
         val footer: View = findViewById<View>(R.id.footer_layout)
+        val header: View = findViewById<View>(R.id.header_layout)
         val searchView = footer.findViewById<SearchView>(R.id.search_view)
-        val btnFooterCart: ImageButton = footer.findViewById<ImageButton>(R.id.btnFooterCart)
+        val btnHeaderCart: ImageButton = header.findViewById<ImageButton>(R.id.btnCart)
 
-        btnFooterCart.setOnClickListener {
+        btnHeaderCart.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
         }
 
@@ -90,7 +94,6 @@ class ListProductsActivity : AppCompatActivity() {
             }
 
 
-
         })
         val btnQR: ImageButton = footer.findViewById(R.id.btnFooterQR)
 
@@ -99,13 +102,42 @@ class ListProductsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val headerTitle = findViewById<TextView>(R.id.header_title)
+
+
+// Pour changer le titre dynamiquement
+        headerTitle.text = "Accueil" // ou "Accueil", etc.
 
 
     }
 
+override fun onResume() {
+    super.onResume()
+    updateCartBadge()
+}
 
+    private fun updateCartBadge() {
+        val cartSize = CartManager.getCartSize()
+        val tvBadge = findViewById<TextView>(R.id.cart_badge)
+
+        if (cartSize > 0) {
+            tvBadge.text = cartSize.toString()
+            tvBadge.visibility = View.VISIBLE
+        } else {
+            tvBadge.visibility = View.GONE
+        }
+    }
 
 
 
 }
+
+
+
+
+
+
+
+
+
 
