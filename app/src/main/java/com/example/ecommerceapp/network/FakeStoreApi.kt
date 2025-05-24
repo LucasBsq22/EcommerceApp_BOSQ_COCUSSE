@@ -12,5 +12,6 @@ interface FakeStoreApi {
 
     // Récupère un produit par ID
     @GET("products/{id}")
-    suspend fun getProductById(@Query("id") id: Int): Product
+    suspend fun getProductById(@retrofit2.http.Path("id") id: Int): Product
+
 }

@@ -30,7 +30,7 @@ class QRScanActivity : AppCompatActivity() {
                 val productId = result.contents.toIntOrNull()
                 if (productId != null) {
                     val intent = Intent(this, ProductDetailsActivity::class.java)
-                    intent.putExtra("product", productId)
+                    intent.putExtra("productId", productId)
                     startActivity(intent)
                 } else {
                     Toast.makeText(this, "QR invalide : pas un ID numérique", Toast.LENGTH_SHORT).show()

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/product_details_scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,6 +17,7 @@
             android:id="@+id/ivProductImage"
             android:layout_width="match_parent"
             android:layout_height="320dp"
+            android:layout_marginTop="10dp"
             android:scaleType="fitCenter"
             android:contentDescription="@string/product_image" />
 
@@ -35,13 +37,36 @@
             android:textStyle="bold"
             android:layout_marginTop="16dp" />
 
-        <TextView
-            android:id="@+id/tvProductPrice"
+        <LinearLayout
+            android:id="@+id/price_action_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#D32F2F"
-            android:layout_marginTop="8dp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:textColor="#E64A19"
+                android:text="695.0 €"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddToCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ajouter"
+                android:textColor="@android:color/white"
+                app:backgroundTint="#38BA84"
+                app:cornerRadius="10dp"
+                app:icon="@drawable/ic_add_cart"
+                android:layout_marginStart="12dp"/>
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tvProductDescription"
@@ -51,12 +76,5 @@
             android:justificationMode="inter_word"
             android:layout_marginTop="12dp" />
 
-
-        <Button
-            android:id="@+id/btnAddToCart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ajouter au panier"
-            android:layout_marginTop="20dp" />
     </LinearLayout>
 </ScrollView>
