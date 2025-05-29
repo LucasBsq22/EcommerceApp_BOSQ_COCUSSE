@@ -3,19 +3,14 @@ package com.example.ecommerceapp.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerceapp.R
 import com.example.ecommerceapp.databinding.ActivityListProductsBinding
 import com.example.ecommerceapp.viewmodel.ProductViewModel
-import com.example.ecommerceapp.ui.adapter.ProductAdapter
-import com.example.ecommerceapp.ui.CartActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ecommerceapp.cart.CartManager
 
@@ -41,6 +36,7 @@ class ListProductsActivity : AppCompatActivity() {
 //            layoutManager = LinearLayoutManager(this@ListProductsActivity)
 //            adapter = productAdapter
 //        }
+
         binding.recyclerViewProducts.apply {
             layoutManager = GridLayoutManager(this@ListProductsActivity, 2)
             adapter = productAdapter
@@ -51,12 +47,6 @@ class ListProductsActivity : AppCompatActivity() {
 
         viewModel.products.observe(this) { products ->
             productAdapter.submitList(products)
-        }
-
-        viewModel.error.observe(this) { errorMsg ->
-            errorMsg?.let {
-                // TODO : afficher une erreur dans un Toast ou TextView
-            }
         }
 
         val footer: View = findViewById<View>(R.id.footer_layout)
@@ -71,7 +61,6 @@ class ListProductsActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    // TODO : lancer la recherche sur `query`
                 }
                 return true
             }
@@ -105,8 +94,7 @@ class ListProductsActivity : AppCompatActivity() {
         val headerTitle = findViewById<TextView>(R.id.header_title)
 
 
-// Pour changer le titre dynamiquement
-        headerTitle.text = "Accueil" // ou "Accueil", etc.
+        headerTitle.text = " Accueil"
 
 
     }

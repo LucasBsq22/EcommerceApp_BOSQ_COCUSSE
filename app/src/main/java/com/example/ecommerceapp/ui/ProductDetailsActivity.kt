@@ -17,6 +17,7 @@ import com.example.ecommerceapp.cart.CartManager
 import com.example.ecommerceapp.databinding.ActivityProductDetailsBinding
 import com.example.ecommerceapp.model.Product
 import com.example.ecommerceapp.network.FakeStoreApi
+import com.example.ecommerceapp.network.RetrofitInstance
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,6 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ProductDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProductDetailsBinding
+    private lateinit var currentProduct: Product
 
     private val api: FakeStoreApi by lazy {
         Retrofit.Builder()
@@ -40,45 +42,39 @@ class ProductDetailsActivity : AppCompatActivity() {
         binding = ActivityProductDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val productId = intent.getIntExtra("productId", -1)
         val product = intent.getParcelableExtra<Product>("product")
-        product?.let {
-            binding.tvProductTitle.text = it.title
-            binding.tvProductPrice.text = "${it.price} €"
-            binding.tvProductRating.text = "Note : ${it.rating.rate}/5 (${it.rating.count} avis)"
-            binding.tvProductDescription.text = it.description
 
-            Glide.with(this)
-                .load(it.image)
-                .into(binding.ivProductImage)
+        if (productId != -1) {
+            // Cas QR code
+            lifecycleScope.launch {
+                try {
+                    val fetchedProduct = RetrofitInstance.api.getProductById(productId)
+                    displayProduct(fetchedProduct)
+                } catch (e: Exception) {
+                    Toast.makeText(this@ProductDetailsActivity, "Erreur de chargement", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else if (product != null) {
+            // Cas clic dans la liste des produits
+            displayProduct(product)
+        } else {
+            Toast.makeText(this, "Produit invalide", Toast.LENGTH_SHORT).show()
+            finish()
         }
+
         binding.btnAddToCart.setOnClickListener {
-            product?.let {
-                CartManager.addToCart(it)
+            if (::currentProduct.isInitialized) {
+                CartManager.addToCart(currentProduct)
                 updateCartBadge()
                 Toast.makeText(this, "Ajouté au panier !", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Produit non chargé", Toast.LENGTH_SHORT).show()
             }
         }
 
-//        val productId = intent.getIntExtra("product", -1)
-//
-//        if (productId != -1) {
-//            lifecycleScope.launch {
-//                try {
-//                    val product = api.getProductById(productId)
-//                    displayProduct(product)
-//                } catch (e: Exception) {
-//                    Toast.makeText(this@ProductDetailsActivity, "Erreur lors du chargement", Toast.LENGTH_SHORT).show()
-//                    finish()
-//                }
-//            }
-//        } else {
-//            Toast.makeText(this, "Produit invalide", Toast.LENGTH_SHORT).show()
-//            finish()
-//        }
-
 
         val header: View = findViewById<View>(R.id.header_layout)
-        val searchView = header.findViewById<SearchView>(R.id.search_view)
         val btnHeaderCart: ImageButton = header.findViewById<ImageButton>(R.id.btnCart)
 
         btnHeaderCart.setOnClickListener {
@@ -86,10 +82,9 @@ class ProductDetailsActivity : AppCompatActivity() {
         }
 
         val headerTitle = findViewById<TextView>(R.id.header_title)
-        //val badge = findViewById<TextView>(R.id.cart_badge)
 
-// Pour changer le titre dynamiquement
-        headerTitle.text = "Détails du produit" // ou "Accueil", etc.
+        // Titre de la page
+        headerTitle.text = "Détails du produit"
 
 
     }
@@ -111,22 +106,18 @@ class ProductDetailsActivity : AppCompatActivity() {
         }
     }
 
-//    @RequiresApi(Build.VERSION_CODES.N)
-//    private fun displayProduct(product: Product) {
-//        binding.tvProductTitle.text = product.title
-//        binding.tvProductDescription.text = product.description
-//        binding.tvProductPrice.text = "${product.price} €"
-//        binding.tvProductRating.text = "Note : ${product.rating.rate}/5 (${product.rating.count} avis)"
-//
-//        Glide.with(this)
-//            .load(product.image)
-//            .into(binding.ivProductImage)
-//
-//        binding.btnAddToCart.setOnClickListener {
-//            CartManager.addToCart(product)
-//            Toast.makeText(this, "Ajouté au panier", Toast.LENGTH_SHORT).show()
-//        }
-//    }
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun displayProduct(product: Product) {
+        currentProduct = product
+        binding.tvProductTitle.text = product.title
+        binding.tvProductPrice.text = "${product.price} €"
+        binding.tvProductDescription.text = product.description
+        binding.tvProductRating.text = "Note : ${product.rating.rate}/5 (${product.rating.count} avis)"
 
+        Glide.with(this)
+            .load(product.image)
+            .into(binding.ivProductImage)
+    }
 
 }
+

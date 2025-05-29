@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tvOrderSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Récapitulatif de la commande"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:drawablePadding="8dp"
+            android:textColor="#333"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPaymentItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/tvTotalAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp"
+            android:drawablePadding="8dp"
+            android:text="Total à payer : 0.00 €"/>
+
+
+        <EditText
+            android:id="@+id/etCardName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom sur la carte"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="8dp"
+            android:padding="12dp"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/etCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Numéro de carte"
+            android:inputType="number"
+            android:drawableStart="@drawable/ic_credit_card"
+            android:drawablePadding="8dp"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <EditText
+                android:id="@+id/etCardExpiry"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="MM/AA"
+                android:inputType="text"
+                android:drawablePadding="8dp"
+                android:padding="12dp"/>
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etCardCVV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="CVV"
+                android:inputType="number"
+                android:drawablePadding="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnFakePay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirmer le paiement"
+            android:textSize="17sp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#38BA84"
+            android:padding="12dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+    </LinearLayout>
+</ScrollView>

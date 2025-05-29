@@ -7,9 +7,8 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.SearchView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerceapp.R
 import com.example.ecommerceapp.cart.CartManager
 import com.example.ecommerceapp.databinding.ActivityCartBinding
-import com.example.ecommerceapp.ui.adapter.ProductAdapter
 import com.google.android.material.snackbar.Snackbar
 
 class CartActivity : AppCompatActivity() {
@@ -58,35 +56,47 @@ class CartActivity : AppCompatActivity() {
             adapter.updateData()
             updateTotalPrice()
             updateCartBadge()
-            //updateEmptyCartMessage()
 
 
-            val snackbar = Snackbar.make(binding.root, "PANIER VIDÉ", Snackbar.LENGTH_LONG)
-
-                .setAction("Restaurer") {
-                    for ((product, qty) in oldCart) {
-                        repeat(qty) { CartManager.addToCart(product) }
+            val snackbar = if (oldCart.isNullOrEmpty()) {
+                Snackbar.make(binding.root, "LE PANIER EST DÉJÀ VIDE", Snackbar.LENGTH_LONG)
+            } else {
+                Snackbar.make(binding.root, "PANIER VIDÉ", Snackbar.LENGTH_LONG)
+                    .setAction("Restaurer") {
+                        for ((product, qty) in oldCart) {
+                            repeat(qty) {
+                                CartManager.addToCart(product)
+                            }
+                        }
+                        adapter.updateData()
+                        updateTotalPrice()
+                        updateCartBadge()
                     }
-                    adapter.updateData()
-                    updateTotalPrice()
-                    updateCartBadge()
-                    //updateEmptyCartMessage()
+            }
 
-                }
-
-                val view = snackbar.view
-                val layoutParams = view.layoutParams as FrameLayout.LayoutParams
-                layoutParams.gravity = Gravity.CENTER_HORIZONTAL or Gravity.TOP
-                view.layoutParams = layoutParams
-                view.translationY = binding.root.height / 2f - view.height
+            val view = snackbar.view
+            val layoutParams = view.layoutParams as FrameLayout.LayoutParams
+            layoutParams.gravity = Gravity.CENTER_HORIZONTAL or Gravity.TOP
+            view.layoutParams = layoutParams
+            view.translationY = binding.root.height / 2f - view.height
 
             snackbar.setBackgroundTint(ContextCompat.getColor(this, R.color.green))
-                snackbar.setTextColor(Color.WHITE)
-                snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.setTextColor(Color.WHITE)
+            snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.red))
 
-                snackbar.show()
+            snackbar.show()
 
         }
+
+        binding.btnGoToPayment.setOnClickListener {
+            if (CartManager.getCartSize()==0){
+                Toast.makeText(this, "Le panier est vide !", Toast.LENGTH_LONG).show()
+            }
+            else{
+                startActivity(Intent(this, PaymentActivity::class.java))
+            }
+        }
+
 
 
     }
@@ -94,12 +104,12 @@ class CartActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateCartBadge()
-        //updateEmptyCartMessage()
     }
 
     private fun updateTotalPrice() {
         adapter.updateData()
-        binding.tvTotalPrice.text = "Total : ${CartManager.getTotalPrice()} €"
+        val totalFormatted = String.format("%.2f €", CartManager.getTotalPrice())
+        binding.tvTotalPrice.text = "Total : $totalFormatted"
         updateCartBadge()
     }
 
@@ -128,9 +138,5 @@ class CartActivity : AppCompatActivity() {
             emptyText.visibility = View.GONE
         }
     }
-
-
-
-
 
 }

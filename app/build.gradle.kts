@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.billing)
     dependencies {
         implementation(libs.androidx.core.ktx)
         implementation(libs.androidx.appcompat)
@@ -75,6 +76,10 @@ dependencies {
         kapt("com.github.bumptech.glide:compiler:4.12.0")
 
         implementation("com.google.android.material:material:1.11.0")
+
+        // Stripe
+        implementation("com.stripe:stripe-android:21.15.0")
+
 
 
     }

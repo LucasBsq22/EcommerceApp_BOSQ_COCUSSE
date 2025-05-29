@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="320dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:scaleType="fitCenter"
             android:contentDescription="@string/product_image" />
 
@@ -75,6 +76,10 @@
             android:textSize="18sp"
             android:justificationMode="inter_word"
             android:layout_marginTop="12dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
 
     </LinearLayout>
 </ScrollView>

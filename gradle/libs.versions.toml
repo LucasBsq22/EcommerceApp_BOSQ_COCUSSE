@@ -12,6 +12,7 @@ activity = "1.10.1"
 constraintlayout = "2.2.1"
 zxing = "1.9.13"
 zxingAndroidEmbedded = "4.3.0"
+billing = "1.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,6 +37,7 @@ glideCompiler = "com.github.bumptech.glide:compiler:4.12.0"
 # ZXing (QR Code scanner)
 zxing = { group = "me.dm7.barcodescanner", name = "zxing", version = "1.9.13" }
 zxing-android-embedded = { module = "com.journeyapps:zxing-android-embedded", version.ref = "zxingAndroidEmbedded" }
+billing = { group = "com.google.androidbrowserhelper", name = "billing", version.ref = "billing" }
 #zxing = "me.dm7.barcodescanner:zxing:1.9.13"
 
 

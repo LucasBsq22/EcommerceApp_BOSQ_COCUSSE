@@ -1,4 +1,4 @@
-package com.example.ecommerceapp.ui.adapter
+package com.example.ecommerceapp.ui
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.example.ecommerceapp.databinding.ProductViewBinding
 import com.example.ecommerceapp.model.Product
-import com.example.ecommerceapp.ui.ProductDetailsActivity
 
 class ProductAdapter :
     ListAdapter<Product, ProductAdapter.ProductViewHolder>(DiffCallback()) {
